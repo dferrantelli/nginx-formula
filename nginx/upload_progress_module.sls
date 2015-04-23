@@ -2,7 +2,7 @@
 
 upload_progress_conf:
   file.managed:
-    - name: {{ nginx.conf_dir }}/conf.d/upload_progress.conf
+    - name: {{ nginx_map.conf_dir }}/conf.d/upload_progress.conf
     - template: jinja
     - source: salt://nginx/templates/upload_progress.jinja
     - user: root
