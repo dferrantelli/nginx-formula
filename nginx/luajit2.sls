@@ -1,5 +1,5 @@
 {% set nginx = pillar.get('nginx', {}) -%}
-{% set home = nginx.get('home', '/var/www') -%}
+{% set nginx_home = nginx.get('home', '/var/www') -%}
 {% set source = nginx.get('source_root', '/usr/local/src') -%}
 
 get-luajit2:
