@@ -15,7 +15,6 @@ include:
 {% else %}
   - nginx.package
 {% endif -%}
-
 {% if pillar.get('nginx', {}).get('use_upload_progress', false) %}
   - nginx.upload_progress_module
 {% else %}
