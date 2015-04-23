@@ -1,0 +1,4 @@
+upload_progress {{ salt['pillar.get']('nginx.upload_progress.zone_name', 'proxied') }} {{ salt['pillar.get']('nginx.upload_progress.zone_size', '1m') }};
+{% if salt['pillar.get']('nginx.upload_progress.javascript_output', 'true') -%}
+upload_progress_java_output;
+{% endif -%}
