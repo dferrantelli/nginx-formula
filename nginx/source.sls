@@ -89,9 +89,12 @@ get-nginx:
       - file: get-nginx
 
 {% for name, module in nginx.get('modules', {}).items() -%}
-get-nginx-{{name}}:
+nginx-{{name}}-source-dir:
   file.directory:
     - name: {{ nginx_modules_dir }}/{{name}}
+    - makedirs: true
+
+get-nginx-{{name}}:
   file.managed:
     - name: {{ nginx_modules_dir }}/{{name}}.tar.gz
     - source: {{ module['source'] }}
