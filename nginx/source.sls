@@ -101,8 +101,7 @@ get-nginx-{{name}}:
     - source_hash: {{ module['source_hash'] }}
   cmd.wait:
     - cwd: {{ nginx_modules_dir }}
-    - names:
-        - tar --transform "s,^$(tar --list -zf {{name}}.tar.gz | head -n 1),{{name}}/," -zxf {{name}}.tar.gz
+    - name: tar --strip 1 -zxf {{name}}.tar.gz -C {{name}}
     - watch:
       - file: get-nginx-{{name}}
     - require_in:
