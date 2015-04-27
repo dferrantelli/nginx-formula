@@ -15,4 +15,6 @@ get-luajit2:
     - require_in:
       - cmd: nginx
   pkg.installed:
-    - name: lua-devel
+    - names: 
+      - liblua5.1.0-dev
+      - libluajit-5.1-dev
