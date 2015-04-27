@@ -8,6 +8,10 @@
 
 
 get_geolib:
+  pkg.installed:
+    - names:
+      - eclipse-cdt-autotools
+      - automake1.11
   file.managed:
     - name: {{ source }}/GeoIP-{{ geolib_version }}.tar.gz
     - source: http://geolite.maxmind.com/download/geoip/api/c/GeoIP-{{ geolib_version }}.tar.gz
@@ -18,6 +22,8 @@ get_geolib:
     - creates: /usr/lib/libGeoIP.so.{{ geolib_version }}
     - watch:
       - file: get_geolib
+    - require:
+      - package: get_geolib
     - require_in:
       - cmd: nginx
 
