@@ -2,8 +2,8 @@
 {% set home = nginx.get('home', '/var/www') -%}
 {% set source = nginx.get('source_root', '/usr/local/src') -%}
 
-{% set geolib_filename = nginx.get('geolib_version', {}) -%}
-{% set geolib_filepath = nginx.get('geolib_checksum', {}) -%}
+{% set geolib_version = nginx.get('geolib_version', {}) -%}
+{% set geolib_checksum = nginx.get('geolib_checksum', {}) -%}
 {% set geolib_home = nginx.get('geolib_home', {}) -%}
 
 
