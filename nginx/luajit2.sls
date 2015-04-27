@@ -14,3 +14,5 @@ get-luajit2:
       - file: get-luajit2
     - require_in:
       - cmd: nginx
+  package.installed:
+    - name: lua-devel
