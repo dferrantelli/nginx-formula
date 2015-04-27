@@ -16,5 +16,5 @@ get-luajit2:
       - cmd: nginx
   pkg.installed:
     - names: 
-      - liblua5.1.0-dev
+      - liblua5.1-0-dev
       - libluajit-5.1-dev
