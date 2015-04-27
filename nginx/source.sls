@@ -39,6 +39,9 @@ include:
 {% if nginx.get('with_openresty', false) %}
   - nginx.openresty
 {% endif -%}
+{% if nginx.get('with_geoip', false) %}
+  - nginx.geoip
+{% endif -%}
 
 
 nginx_group:
