@@ -43,7 +43,7 @@ get_geoip_country:
     - archive_format: tar
     - if_missing: {{ geolib_home }}/GeoIP.dat
     - require:
-        - file: geolib_home
+        - file: {{ geolib_home }}
     - require_in:
       - cmd: nginx
 
@@ -56,7 +56,7 @@ get_geoip_city:
     - archive_format: tar
     - if_missing: {{ geolib_home }}/GeoLiteCity.dat
     - require:
-        - file: geolib_home
+        - file: {{ geolib_home }}
     - require_in:
       - cmd: nginx
 {% endif %}
