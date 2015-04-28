@@ -36,12 +36,10 @@ get_geolib:
     - makedirs: True
 
 get_geoip_country:
-  archive.extracted:
-    - name: {{ geolib_home }}/
-    - source: {{ nginx.geoip.country_src }}
-    - tar_options: z
-    - archive_format: tar
-    - if_missing: {{ geolib_home }}/GeoIP.dat
+  cmd.run:
+    - cwd: {{ geolib_home }}
+    - name: wget {{ nginx.geoip.country_src }} && gunzip GeoIP.dat.gz
+    - creates: {{ geolib_home }}/GeoIP.dat
     - require:
         - file: {{ geolib_home }}
     - require_in:
@@ -49,12 +47,10 @@ get_geoip_country:
 
 {% if nginx.get('geolib_cities', False) %}
 get_geoip_city:
-  archive.extracted:
-    - name: {{ geolib_home }}/
-    - source: {{ nginx.geoip.city_src }}
-    - tar_options: z
-    - archive_format: tar
-    - if_missing: {{ geolib_home }}/GeoLiteCity.dat
+  cmd.run:
+    - cwd: {{ geolib_home }}
+    - name: wget {{ nginx.geoip.city_src }} && gunzip GeoLiteCity.dat.gz
+    - creates: {{ geolib_home }}/GeoLiteCity.dat
     - require:
         - file: {{ geolib_home }}
     - require_in:
