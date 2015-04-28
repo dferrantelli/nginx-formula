@@ -18,3 +18,4 @@ get-luajit2:
     - names: 
       - liblua5.1-0-dev
       - libluajit-5.1-dev
+      - lua5.1
