@@ -42,7 +42,9 @@ include:
 {% if nginx.get('with_geoip', false) %}
   - nginx.geoip
 {% endif -%}
-
+{% if nginx.get('with_passenger', false) %}
+  - nginx.passenger
+{% endif -%}
 
 nginx_group:
   group.present:
@@ -187,6 +189,9 @@ nginx:
         {%- for name, module in nginx.get('modules', {}).items() %}
         --add-module={{nginx_modules_dir}}/{{name}}
         {%- endfor %}
+        {% if nginx.get('with_passenger', False) %}
+        --add-module={{ nginx.passenger.root }}/ext/nginx
+        {% endif %}
         {%- for name in with_items %}
         --with-{{ name }}
         {%- endfor %}
