@@ -1,4 +1,4 @@
-{% set passenger = pillar.get('nginx.passenger', {}) -%}
+{% set passenger = pillar.get('nginx.passenger') -%}
 
 
 get_passenger_deps:
@@ -10,7 +10,7 @@ get_passenger_deps:
 install_passenger:
   gem.installed:
     - name: passenger
-    - version: {{ passenger.version }}
+    - version: {{ passenger.get('version') }}
   file.managed:
     - name: /etc/nginx/conf.d/passenger.conf
     - template: jinja
