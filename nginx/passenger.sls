@@ -1,4 +1,4 @@
-{% set passenger = pillar.get('passenger', {}) -%}
+{% set passenger = pillar.get('nginx.passenger', {}) -%}
 
 
 get_passenger_deps:
