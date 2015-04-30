@@ -16,5 +16,16 @@ install_passenger:
     - user: root
     - group: root
     - mode: '0644'
+    - context:
+        root: {{ nginx.passenger.root }}
+        version: {{ nginx.passenger.version }}
+        ruby: {{ nginx.passenger.ruby }}
+        spawn_method: {{ nginx.passenger.spawn_method }}
+        buffer_response: {{ nginx.passenger.buffer_response }}
+        max_pool_size: {{ nginx.passenger.max_pool_size }}
+        min_instances: {{ nginx.passenger.min_instances }}
+        max_instances_per_app: {{ nginx.passenger.max_instances_per_app }}
+        pool_idle_time: {{ nginx.passenger.pool_idle_time }}
+        max_requests: {{ nginx.passenger.max_requests }}
     - watch_in:
       - service: nginx
