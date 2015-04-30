@@ -4,7 +4,6 @@ get_passenger_deps:
   pkg.installed:
     - names:
       - ruby-dev
-      - libcurl4-gnutls-dev
 
 install_passenger:
   gem.installed:
