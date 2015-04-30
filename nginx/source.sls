@@ -189,9 +189,9 @@ nginx:
         {%- for name, module in nginx.get('modules', {}).items() %}
         --add-module={{nginx_modules_dir}}/{{name}}
         {%- endfor %}
-        {% if nginx.get('with_passenger', False) %}
+        {%- if nginx.get('with_passenger', False) %}
         --add-module={{ nginx.passenger.root }}/ext/nginx
-        {% endif %}
+        {%- endif %}
         {%- for name in with_items %}
         --with-{{ name }}
         {%- endfor %}
