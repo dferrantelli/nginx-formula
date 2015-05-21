@@ -2,6 +2,11 @@
 {% set nginx_home = nginx.get('home', '/var/www') -%}
 {% set source = nginx.get('source_root', '/usr/local/src') -%}
 
+luajit_src_dir:
+  file.directory:
+    - name: {{ source }}/luajit
+    - makedirs: True
+
 get-luajit2:
   file.managed:
     - name: {{ source }}/luajit.tar.gz
@@ -14,6 +19,9 @@ get-luajit2:
       - file: get-luajit2
     - require_in:
       - cmd: nginx
+    - require:
+      - file: luajit_src_dir
+      - file: get-luajit2
   pkg.installed:
     - names: 
       - liblua5.1-0-dev

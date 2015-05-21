@@ -72,6 +72,11 @@ nginx_user:
     - directory
     - makedirs: True
 
+nginx-src-dir:
+  file.directory:
+    - name: {{ nginx_source }}
+    - makedirs: True
+
 get-nginx:
   pkg.installed:
     - names:
@@ -86,10 +91,11 @@ get-nginx:
       - file: {{ nginx_modules_dir }}
   cmd.wait:
     - cwd: {{ source }}
-    - name: tar --transform "s,^$(tar --list -zf nginx-{{ version }}.tar.gz | head -n 1),nginx-{{ version }}/," -zxf {{ nginx_package }}
+    - name: tar --strip 1 -zxf nginx-{{ version }}.tar.gz -C nginx-{{ version }}
     - require:
       - pkg: get-nginx
       - file: get-nginx
+      - file: nginx-src-dir
     - watch:
       - file: get-nginx
 
