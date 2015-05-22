@@ -5,6 +5,10 @@ get_passenger_deps:
     - names:
       - ruby-dev
 
+nginx_conf_d_dir_present:
+  file.directory:
+    - name: {{ nginx.conf_dir }}/conf.d
+
 install_passenger:
   gem.installed:
     - name: passenger
@@ -29,3 +33,5 @@ install_passenger:
         max_requests: {{ nginx.passenger.max_requests }}
     - watch_in:
       - service: nginx
+    - require:
+      - file: nginx_conf_d_dir_present
