@@ -119,12 +119,16 @@ get-nginx-{{name}}:
       - cmd: nginx
 {% endfor -%}
 
+install-nginx-module-dep-pkgs:
+  pkg.installed:
+    - names: {{ nginx.module_dep_pkgs }}
+
 {% if nginx.get('ngx_devel_kit', true) -%}
 get-ngx_devel_kit:
   file.managed:
     - name: {{ source }}/ngx_devel_kit.tar.gz
-    - source: https://github.com/simpl/ngx_devel_kit/archive/v0.2.18.tar.gz
-    - source_hash: sha1=e21ba642f26047661ada678b21eef001ee2121d8
+    - source: https://github.com/simpl/ngx_devel_kit/archive/v0.2.19.tar.gz
+    - source_hash: sha1=888635e80a8a0e6242b8e9b684ff60ffa70845a2
   cmd.wait:
     - cwd: {{ source }}
     - name: tar -zxf {{ source }}/ngx_devel_kit.tar.gz -C {{ source }}
@@ -233,6 +237,7 @@ nginx:
 {% endif %}
     - require:
       - cmd: get-nginx
+      - pkg: install-nginx-module-dep-pkgs
       {% for name, module in nginx.get('modules', {}).items() -%}
       - file: get-nginx-{{name}}
       {% endfor %}
