@@ -1,4 +1,4 @@
-{% set nginx = pillar.get('nginx', {}) -%}
+{% from "nginx/map.jinja" import nginx as nginx with context %}
 
 get_passenger_deps:
   pkg.installed:
