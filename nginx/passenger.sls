@@ -1,4 +1,5 @@
-{% from "nginx/map.jinja" import nginx as nginx with context %}
+{% set nginx = pillar.get('nginx', {}) -%}
+{% from "nginx/map.jinja" import nginx as nginx_map with context %}
 
 get_passenger_deps:
   pkg.installed:
@@ -12,7 +13,7 @@ nginx_conf_d_dir_present:
 install_passenger:
   gem.installed:
     - name: passenger
-    - version: {{ nginx.passenger.version }}
+    - version: {{ nginx_map.passenger.version }}
   file.managed:
     - name: /etc/nginx/conf.d/passenger.conf
     - template: jinja
@@ -21,16 +22,16 @@ install_passenger:
     - group: root
     - mode: '0644'
     - context:
-        root: {{ nginx.passenger.root }}
-        version: {{ nginx.passenger.version }}
-        ruby: {{ nginx.passenger.ruby }}
-        spawn_method: {{ nginx.passenger.spawn_method }}
-        buffer_response: {{ nginx.passenger.buffer_response }}
-        max_pool_size: {{ nginx.passenger.max_pool_size }}
-        min_instances: {{ nginx.passenger.min_instances }}
-        max_instances_per_app: {{ nginx.passenger.max_instances_per_app }}
-        pool_idle_time: {{ nginx.passenger.pool_idle_time }}
-        max_requests: {{ nginx.passenger.max_requests }}
+        root: {{ nginx_map.passenger.root }}
+        version: {{ nginx_map.passenger.version }}
+        ruby: {{ nginx_map.passenger.ruby }}
+        spawn_method: {{ nginx_map.passenger.spawn_method }}
+        buffer_response: {{ nginx_map.passenger.buffer_response }}
+        max_pool_size: {{ nginx_map.passenger.max_pool_size }}
+        min_instances: {{ nginx_map.passenger.min_instances }}
+        max_instances_per_app: {{ nginx_map.passenger.max_instances_per_app }}
+        pool_idle_time: {{ nginx_map.passenger.pool_idle_time }}
+        max_requests: {{ nginx_map.passenger.max_requests }}
     - watch_in:
       - service: nginx
     - require:
