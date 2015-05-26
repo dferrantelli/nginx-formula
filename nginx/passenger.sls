@@ -5,6 +5,13 @@ get_passenger_deps:
   pkg.installed:
     - names:
       - ruby-dev
+  gem.installed:
+    - name: rake
+  alternatives.install:
+    - name: rake
+    - link: /usr/bin/rake
+    - path: /usr/local/rbenv/versions/2.2.0/bin/rake
+    - priority: 2000
 
 nginx_conf_d_dir_present:
   file.directory:
